@@ -77,7 +77,7 @@ public class Game implements IGame {
         current = xplay;
       }
     }
-    printField();
+
   }
 
   // Zug zuruecknehmen (Feld setzen), voriger Spieler ist "dran"
@@ -91,7 +91,7 @@ public class Game implements IGame {
       } else {
         current = xplay;
       }
-      printField();
+
 
 
     }
