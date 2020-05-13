@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Benedikt
+ * @author Benedikt Wotka, David Nickel
  *
  */
 public class Game implements IGame {

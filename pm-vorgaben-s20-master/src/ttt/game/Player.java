@@ -6,7 +6,7 @@ package ttt.game;
 import ttt.strategy.IGameStrategy;
 
 /**
- * @author Benedikt
+ * @author Benedikt Wotka, David Nickel
  *
  */
 public class Player implements IPlayer {

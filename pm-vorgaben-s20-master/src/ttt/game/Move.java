@@ -4,7 +4,7 @@
 package ttt.game;
 
 /**
- * @author Benedikt
+ * @author Benedikt Wotka, David Nickel
  *
  */
 public class Move implements IMove {
