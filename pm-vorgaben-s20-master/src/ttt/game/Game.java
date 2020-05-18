@@ -19,6 +19,7 @@ public class Game implements IGame {
   List<IMove> leftMoves;
 
   // x = xplayers field, o = oplayers field, 'empty' = free field
+  // gameField[colum][row]
   char[][] gameField;
 
   /**
@@ -106,6 +107,11 @@ public class Game implements IGame {
     if (!(gameField[m.getColumn()][m.getRow()] == '-')) {
       // set it back to normal
       gameField[m.getColumn()][m.getRow()] = '-';
+      if (currentPlayer() == xplay) {
+        current = oplay;
+      } else {
+        current = xplay;
+      }
     } else {
       System.out.println("That move was not performed.");
     }
@@ -184,10 +190,10 @@ public class Game implements IGame {
   public void printField() {
     System.out.println("Current Player: " + currentPlayer().getSymbol());
     System.out.println("The game looks like this now:");
-    for (int i = 0; i < 3; i++) {
+    for (int rowi = 0; rowi < 3; rowi++) {
 
-      for (int j = 0; j < 3; j++) {
-        System.out.print(gameField[i][j] + " ");
+      for (int columni = 0; columni < 3; columni++) {
+        System.out.print(gameField[columni][rowi] + " ");
       }
 
       System.out.println();

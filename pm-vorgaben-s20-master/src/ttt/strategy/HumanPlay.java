@@ -25,8 +25,6 @@ public class HumanPlay implements IGameStrategy {
 
   @Override
   public IMove nextMove(IGame g) {
-    g.printField();
-
     // reading the column
     int column;
     System.out.println("Which column do you want to play? [0-2]");

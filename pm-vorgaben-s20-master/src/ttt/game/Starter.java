@@ -17,7 +17,7 @@ public class Starter {
   /**
    * Static void main to set up all the objects and classes.
    * 
-   * @param args String[] args
+   * @param args String[] args for console input, not used here
    */
   public static void main(String[] args) {
 
@@ -38,13 +38,14 @@ public class Starter {
     System.out.println("Game starting");
 
     while (maingame.evalState(xplayer) == 0 && !maingame.remainingMoves().isEmpty()) {
-      maingame.doMove(maingame.currentPlayer().nextMove(maingame));
       System.out.println("**************");
       maingame.printField();
       System.out.println("**************");
-    }
+      maingame.doMove(maingame.currentPlayer().nextMove(maingame));
 
-    System.out.println("Game ended");
+    }
+    maingame.printField();
+    System.out.println("~~~Game ended!~~~");
 
 
 
