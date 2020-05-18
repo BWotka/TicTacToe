@@ -1,6 +1,7 @@
 
 package ttt.game;
 
+import Charts.Charts;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import ttt.strategy.HumanPlay;
@@ -46,6 +47,21 @@ public class Starter {
     }
     maingame.printField();
     System.out.println("~~~Game ended!~~~");
+
+    Charts chart = new Charts();
+    if (maingame.evalState(xplayer) == 1) {
+      chart.addGameToFile("xplayer", maingame.remainingMoves().size());
+    }
+    if (maingame.evalState(oplayer) == 1) {
+      chart.addGameToFile("oplayer", maingame.remainingMoves().size());
+    }
+    chart.addPlayerToFile("xplayer", maingame.evalState(xplayer));
+    chart.addPlayerToFile("oplayer", maingame.evalState(oplayer));
+
+    chart.chartPlayer("xplayer");
+    String[] players = {"xplayer", "oplayer"};
+    chart.chartPlayers(players);
+    chart.chartGames();
 
 
 
