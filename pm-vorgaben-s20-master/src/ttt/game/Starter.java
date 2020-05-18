@@ -20,9 +20,9 @@ public class Starter {
     BufferedReader reader = new BufferedReader(inread);
 
     IPlayer xplayer = new Player('X');
-    xplayer.setStrategy(new MinMaxStrategy());
+    xplayer.setStrategy(new HumanPlay(reader));
     IPlayer oplayer = new Player('O');
-    oplayer.setStrategy(new HumanPlay(reader));
+    oplayer.setStrategy(new MinMaxStrategy());
     IGame maingame = new Game();
 
 

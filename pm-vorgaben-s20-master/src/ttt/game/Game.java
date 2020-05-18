@@ -33,7 +33,7 @@ public class Game implements IGame {
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        gameField[i][j] = '\u0000';
+        gameField[i][j] = '-';
         leftMoves.add(new Move(i, j));
       }
 
@@ -88,7 +88,7 @@ public class Game implements IGame {
   public void undoMove(IMove m) {
     if (madeMoves.remove(m)) {
       leftMoves.add(m);
-      gameField[m.getColumn()][m.getRow()] = '\u0000';
+      gameField[m.getColumn()][m.getRow()] = '-';
       if (currentPlayer() == xplay) {
         current = oplay;
       } else {
@@ -119,7 +119,7 @@ public class Game implements IGame {
     // check rows
     for (int i = 0; i < 3; i++) {
       if (gameField[0][i] == gameField[1][i] && gameField[1][i] == gameField[2][i]
-          && !(gameField[0][i] == '\u0000')) {
+          && !(gameField[0][i] == '-')) {
         if (gameField[0][i] == p.getSymbol()) {
           return 1;
         } else {
@@ -131,7 +131,7 @@ public class Game implements IGame {
     // check columns
     for (int j = 0; j < 3; j++) {
       if (gameField[j][0] == gameField[j][1] && gameField[j][1] == gameField[j][2]
-          && !(gameField[j][0] == '\u0000')) {
+          && !(gameField[j][0] == '-')) {
         if (gameField[j][0] == p.getSymbol()) {
           return 1;
         } else {
@@ -144,7 +144,7 @@ public class Game implements IGame {
 
     // check diagonal \
     if (gameField[0][0] == gameField[1][1] && gameField[1][1] == gameField[2][2]
-        && !(gameField[0][0] == '\u0000')) {
+        && !(gameField[0][0] == '-')) {
       if (gameField[0][0] == p.getSymbol()) {
         return 1;
       } else {
@@ -154,7 +154,7 @@ public class Game implements IGame {
     }
     // check diagonal /
     if (gameField[2][0] == gameField[1][1] && gameField[1][1] == gameField[0][2]
-        && !(gameField[2][0] == '\u0000')) {
+        && !(gameField[2][0] == '-')) {
       if (gameField[2][0] == p.getSymbol()) {
         return 1;
       } else {
