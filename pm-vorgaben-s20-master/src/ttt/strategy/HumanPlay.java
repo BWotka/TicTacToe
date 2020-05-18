@@ -17,7 +17,7 @@ public class HumanPlay implements IGameStrategy {
   private BufferedReader reader;
 
   public HumanPlay(BufferedReader breader) {
-    System.out.println("The Strategy HumanPlay was choose. YOU will have to play");
+    System.out.println("The Strategy HumanPlay was choosen. YOU will have to play!");
     reader = breader;
   }
 
