@@ -1,11 +1,11 @@
-/**
- * 
- */
+
 package ttt.game;
 
 import ttt.strategy.IGameStrategy;
 
 /**
+ * Player class, saves symbol and uses strategy to find a move.
+ * 
  * @author Benedikt Wotka, David Nickel
  *
  */

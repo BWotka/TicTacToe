@@ -1,9 +1,9 @@
-/**
- * 
- */
+
 package ttt.game;
 
 /**
+ * Move class, stores row and column.
+ * 
  * @author Benedikt Wotka, David Nickel
  *
  */
@@ -26,6 +26,12 @@ public class Move implements IMove {
   @Override
   public int getColumn() {
     return column;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    Move m = (Move) obj;
+    return (m.getColumn() == this.getColumn() && m.getRow() == this.getRow());
   }
 
 }

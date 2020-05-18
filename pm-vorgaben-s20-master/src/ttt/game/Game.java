@@ -1,12 +1,12 @@
-/**
- * 
- */
+
 package ttt.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class game, stores moves and field.
+ * 
  * @author Benedikt Wotka, David Nickel
  *
  */
@@ -21,6 +21,9 @@ public class Game implements IGame {
   // x = xplayers field, o = oplayers field, 'empty' = free field
   char[][] gameField;
 
+  /**
+   * creates a new Game object and does the set up.
+   */
   public Game() {
 
 
@@ -72,13 +75,17 @@ public class Game implements IGame {
   public void doMove(IMove m) {
 
     if (leftMoves.remove(m)) {
+
       gameField[m.getColumn()][m.getRow()] = currentPlayer().getSymbol();
+      madeMoves.add(m);
 
       if (currentPlayer() == xplay) {
         current = oplay;
       } else {
         current = xplay;
       }
+    } else {
+      System.out.println("Not in the list of left moves");
     }
 
   }
