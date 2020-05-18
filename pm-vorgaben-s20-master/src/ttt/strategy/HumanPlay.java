@@ -9,6 +9,8 @@ import ttt.game.Move;
 
 
 /**
+ * Strategy is to ask the user for moves.
+ * 
  * @author Benedikt Wotka, David Nickel
  *
  */
@@ -50,16 +52,22 @@ public class HumanPlay implements IGameStrategy {
       row = 1;
       e.printStackTrace();
     }
-    if (row < 1 || row > 3) {
+    if (row < 0 || row > 2) {
       System.out.println("The row is not between 0 and 2, default value 1 was used");
       row = 1;
     }
-    if (column < 1 || column > 3) {
-      System.out.println("The column is not between 0 and 3, default value 1 was used");
+    if (column < 0 || column > 2) {
+      System.out.println("The column is not between 0 and 2, default value 1 was used");
       column = 1;
     }
+    boolean moveInSet = false;
     nextMove = new Move(column, row);
-    if (!g.remainingMoves().contains(nextMove)) {
+    for (IMove m : g.remainingMoves()) {
+      if (m.getColumn() == nextMove.getColumn() && m.getRow() == nextMove.getRow()) {
+        moveInSet = true;
+      }
+    }
+    if (!moveInSet) {
       System.out.println(
           "Your move on the coordinates was not available, a other move was choosen for you.");
       nextMove = g.remainingMoves().get(0);
