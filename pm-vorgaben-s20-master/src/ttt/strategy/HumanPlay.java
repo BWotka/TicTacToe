@@ -26,6 +26,8 @@ public class HumanPlay implements IGameStrategy {
   @Override
   public IMove nextMove(IGame g) {
     g.printField();
+
+    // reading the column
     int column;
     System.out.println("Which column do you want to play? [0-2]");
     try {
@@ -39,6 +41,8 @@ public class HumanPlay implements IGameStrategy {
       column = 1;
       e1.printStackTrace();
     }
+
+    // reading the row
     int row;
     System.out.println("Which row do you want to play? [0-2]");
     try {
@@ -52,6 +56,8 @@ public class HumanPlay implements IGameStrategy {
       row = 1;
       e.printStackTrace();
     }
+
+    // testing if the values are in range
     if (row < 0 || row > 2) {
       System.out.println("The row is not between 0 and 2, default value 1 was used");
       row = 1;
@@ -60,6 +66,8 @@ public class HumanPlay implements IGameStrategy {
       System.out.println("The column is not between 0 and 2, default value 1 was used");
       column = 1;
     }
+
+    // testing if the move is still available
     boolean moveInSet = false;
     nextMove = new Move(column, row);
     for (IMove m : g.remainingMoves()) {

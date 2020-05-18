@@ -27,17 +27,13 @@ public class Game implements IGame {
   public Game() {
 
 
-    madeMoves = new ArrayList<IMove>();
-    leftMoves = new ArrayList<IMove>();
-
-
 
     gameField = new char[3][3];
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         gameField[i][j] = '-';
-        leftMoves.add(new Move(i, j));
+
       }
 
     }
@@ -67,17 +63,30 @@ public class Game implements IGame {
   // Welche Zuege sind noch moeglich (aka freie Felder)
   @Override
   public List<IMove> remainingMoves() {
-    return leftMoves;
+    List<IMove> remain = new ArrayList<IMove>();
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (Character.valueOf(gameField[i][j]).equals('-')) {
+          remain.add(new Move(i, j));
+        }
+
+      }
+    }
+    return remain;
   }
 
   // Zug ausfuehren (Feld setzen), naechster Spieler ist "dran"
   @Override
   public void doMove(IMove m) {
-
-    if (leftMoves.remove(m)) {
-
+    boolean free = false;
+    for (IMove move : remainingMoves()) {
+      if (move.getColumn() == m.getColumn() && move.getRow() == m.getRow()) {
+        free = true;
+      }
+    }
+    if (free) {
       gameField[m.getColumn()][m.getRow()] = currentPlayer().getSymbol();
-      madeMoves.add(m);
+
 
       if (currentPlayer() == xplay) {
         current = oplay;
@@ -93,23 +102,21 @@ public class Game implements IGame {
   // Zug zuruecknehmen (Feld setzen), voriger Spieler ist "dran"
   @Override
   public void undoMove(IMove m) {
-    if (madeMoves.remove(m)) {
-      leftMoves.add(m);
+    // if that field was already changed
+    if (!(gameField[m.getColumn()][m.getRow()] == '-')) {
+      // set it back to normal
       gameField[m.getColumn()][m.getRow()] = '-';
-      if (currentPlayer() == xplay) {
-        current = oplay;
-      } else {
-        current = xplay;
-      }
-
-
-
+    } else {
+      System.out.println("That move was not performed.");
     }
   }
 
   // Spiel zuende?
   @Override
   public boolean ended() {
+    if (remainingMoves().isEmpty()) {
+      return true;
+    }
     if (evalState(xplay) == 0) {
       return false;
     } else {

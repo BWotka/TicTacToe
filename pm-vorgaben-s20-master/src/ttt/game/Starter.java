@@ -4,7 +4,7 @@ package ttt.game;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import ttt.strategy.HumanPlay;
-import ttt.strategy.NoEasyLose;
+import ttt.strategy.MinMaxStrategy;
 
 /**
  * Starter class, sets up the game.
@@ -27,7 +27,7 @@ public class Starter {
     IPlayer xplayer = new Player('X');
     xplayer.setStrategy(new HumanPlay(reader));
     IPlayer oplayer = new Player('O');
-    oplayer.setStrategy(new NoEasyLose());
+    oplayer.setStrategy(new MinMaxStrategy());
     IGame maingame = new Game();
 
 
@@ -39,7 +39,9 @@ public class Starter {
 
     while (maingame.evalState(xplayer) == 0 && !maingame.remainingMoves().isEmpty()) {
       maingame.doMove(maingame.currentPlayer().nextMove(maingame));
+      System.out.println("**************");
       maingame.printField();
+      System.out.println("**************");
     }
 
     System.out.println("Game ended");
