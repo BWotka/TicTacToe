@@ -27,6 +27,8 @@ public class Game implements IGame {
     madeMoves = new ArrayList<IMove>();
     leftMoves = new ArrayList<IMove>();
 
+
+
     gameField = new char[3][3];
 
     for (int i = 0; i < 3; i++) {
@@ -44,6 +46,7 @@ public class Game implements IGame {
   @Override
   public void setPlayerX(IPlayer p) {
     xplay = p;
+    current = xplay;
   }
 
   // Spieler O setzen
