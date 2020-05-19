@@ -3,8 +3,8 @@ package ttt.game;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import ttt.strategy.HumanPlay;
-import ttt.strategy.MinMaxStrategy;
+import jcharts.jcharts;
+import ttt.strategy.*;
 
 /**
  * Starter class, sets up the game.
@@ -28,24 +28,18 @@ public class Starter {
     xplayer.setStrategy(new HumanPlay(reader));
     IPlayer oplayer = new Player('O');
     oplayer.setStrategy(new MinMaxStrategy());
-    IGame maingame = new Game();
 
+    Game maingame = new Game();
+
+    jcharts jchar = new jcharts();
 
 
     maingame.setPlayerX(xplayer);
     maingame.setPlayerO(oplayer);
 
-    System.out.println("Game starting");
 
-    while (maingame.evalState(xplayer) == 0 && !maingame.remainingMoves().isEmpty()) {
-      System.out.println("**************");
-      maingame.printField();
-      System.out.println("**************");
-      maingame.doMove(maingame.currentPlayer().nextMove(maingame));
-
-    }
-    maingame.printField();
-    System.out.println("~~~Game ended!~~~");
+    jchar.saveStats(maingame.playGame());
+    jchar.showStats();
 
 
 

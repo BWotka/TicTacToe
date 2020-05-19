@@ -13,14 +13,12 @@ import java.util.List;
 public class Game implements IGame {
   IPlayer xplay;
   IPlayer oplay;
-  IPlayer current;
+  protected IPlayer current;
 
-  List<IMove> madeMoves;
-  List<IMove> leftMoves;
 
   // x = xplayers field, o = oplayers field, 'empty' = free field
   // gameField[colum][row]
-  char[][] gameField;
+  protected char[][] gameField;
 
   /**
    * creates a new Game object and does the set up.
@@ -209,4 +207,24 @@ public class Game implements IGame {
     System.out.println("Game State: Player " + currentPlayer().getSymbol() + state);
   }
 
+  /**
+   * The game itself runs in here.
+   * 
+   * @return the game after it ended
+   */
+  public Game playGame() {
+    System.out.println("Game starting");
+
+    while (evalState(current) == 0 && !remainingMoves().isEmpty()) {
+      System.out.println("**************");
+      printField();
+      System.out.println("**************");
+      doMove(currentPlayer().nextMove(this));
+
+    }
+    printField();
+    System.out.println("~~~Game ended!~~~");
+    return this;
+
+  }
 }
