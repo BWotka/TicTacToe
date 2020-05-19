@@ -32,4 +32,8 @@ public class Player implements IPlayer {
   public char getSymbol() {
     return symbol;
   }
+
+  public IGameStrategy getStrategy() {
+    return strat;
+  }
 }
