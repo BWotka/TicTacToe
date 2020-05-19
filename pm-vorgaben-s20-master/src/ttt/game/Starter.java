@@ -1,9 +1,9 @@
 
 package ttt.game;
 
+import charts.Charts;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import Charts.Charts;
 import ttt.strategy.HumanPlay;
 import ttt.strategy.MinMaxStrategy;
 
@@ -40,13 +40,12 @@ public class Starter {
     maingame.playGame();
 
     Charts chart = new Charts();
-
     chart.saveStats(maingame.playGame(), xplayer, oplayer);
-
     chart.chartPlayer(xplayer);
+    chart.chartPlayer(oplayer);
     Player[] players = {xplayer, oplayer};
     chart.chartPlayers(players);
-    //chart.chartGames(xplayer,oplayer);
+    chart.chartGames(xplayer, oplayer);
 
 
 

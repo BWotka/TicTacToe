@@ -20,7 +20,6 @@ public class Player implements IPlayer {
   @Override
   public void setStrategy(IGameStrategy s) {
     strat = s;
-
   }
 
   @Override
