@@ -1,9 +1,9 @@
 
 package ttt.game;
 
-import Charts.Charts;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import Charts.Charts;
 import ttt.strategy.HumanPlay;
 import ttt.strategy.MinMaxStrategy;
 
@@ -25,23 +25,22 @@ public class Starter {
     InputStreamReader inread = new InputStreamReader(System.in);
     BufferedReader reader = new BufferedReader(inread);
 
-    IPlayer xplayer = new Player('X');
+    Player xplayer = new Player('X');
     xplayer.setStrategy(new HumanPlay(reader));
-    IPlayer oplayer = new Player('O');
+    Player oplayer = new Player('O');
     oplayer.setStrategy(new MinMaxStrategy());
 
     Game maingame = new Game();
 
-    
 
 
     maingame.setPlayerX(xplayer);
     maingame.setPlayerO(oplayer);
 
     maingame.playGame();
-    
+
     Charts chart = new Charts();
-    
+
     chart.saveStats(maingame.playGame(), xplayer, oplayer);
 
     chart.chartPlayer("xplayer");

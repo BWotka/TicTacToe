@@ -20,7 +20,6 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import ttt.game.IGame;
-import ttt.game.IPlayer;
 import ttt.game.Player;
 
 /**
@@ -30,13 +29,13 @@ import ttt.game.Player;
 public class Charts {
   private Scanner sc;
   ArrayList<String> playerList;
-  
+
   /**
    * 
    * @return
    */
-  
-  public void saveStats(IGame game, IPlayer xplayer, IPlayer oplayer) {
+
+  public void saveStats(IGame game, Player xplayer, Player oplayer) {
     if (game.evalState(xplayer) == 1) {
       addGameToFile(xplayer.getStrategy(), game.remainingMoves().size());
     }
@@ -46,11 +45,11 @@ public class Charts {
     addPlayerToFile(xplayer.getStrategy(), game.evalState(xplayer));
     addPlayerToFile(oplayer.getStrategy(), game.evalState(oplayer));
   }
-  
+
   /**
    * 
-   * @param name    the name of the player or strategy from that the values would be searched
-   * @return    values of name
+   * @param name the name of the player or strategy from that the values would be searched
+   * @return values of name
    */
   private int[] valueOfPlayer(String name) {
     int[] values = {0, 0, 0};
@@ -66,10 +65,11 @@ public class Charts {
     return values;
   }
 
-/**
- * shows a pie-chart of player with wins, patts and looses.
- * @param player name of the player
- */
+  /**
+   * shows a pie-chart of player with wins, patts and looses.
+   * 
+   * @param player name of the player
+   */
   public void chartPlayer(String player) {
     int[] values = valueOfPlayer(player);
     DefaultPieDataset pieDataset = new DefaultPieDataset();
@@ -83,11 +83,12 @@ public class Charts {
     frame.pack();
     frame.setVisible(true);
   }
-  
-/**
- * shows a bar chart with the compare of wins and loses of the players
- * @param players name of the player
- */
+
+  /**
+   * shows a bar chart with the compare of wins and loses of the players
+   * 
+   * @param players name of the player
+   */
   public void chartPlayers(String[] players) {
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     for (int i = 0; i < players.length; i++) {
@@ -104,10 +105,10 @@ public class Charts {
     frame.pack();
     frame.setVisible(true);
   }
-  
-/**
- * shows a chart of every game how many moves left.
- */
+
+  /**
+   * shows a chart of every game how many moves left.
+   */
   public void chartGames() {
     readListFromFile("Plays.txt");
 
@@ -132,12 +133,13 @@ public class Charts {
     splineframe.pack();
     splineframe.setVisible(true);
   }
-  
-/**
- * read a list of a txt.file
- * @param fileName  Name of the txt-file
- * @return
- */
+
+  /**
+   * read a list of a txt.file
+   * 
+   * @param fileName Name of the txt-file
+   * @return
+   */
   private boolean readListFromFile(String fileName) {
     playerList = new ArrayList<>();
     try {
@@ -152,12 +154,13 @@ public class Charts {
     return true;
   }
 
-/**
- * writes a player and if he wins, loses or has a patt
- * @param name  Name of player of a game
- * @param game  int shows if the player win (1), lose (-1) or has a patt (0)
- * @return
- */
+  /**
+   * writes a player and if he wins, loses or has a patt
+   * 
+   * @param name Name of player of a game
+   * @param game int shows if the player win (1), lose (-1) or has a patt (0)
+   * @return
+   */
   private boolean addPlayerToFile(String name, int game) {
     FileWriter fw;
     try {
@@ -199,13 +202,14 @@ public class Charts {
     }
     return true;
   }
-  
-/**
- * winner and left moves of the last game
- * @param winner winner of the game
- * @param left  left moves in the game
- * @return
- */
+
+  /**
+   * winner and left moves of the last game
+   * 
+   * @param winner winner of the game
+   * @param left left moves in the game
+   * @return
+   */
   private boolean addGameToFile(String winner, int left) {
     FileWriter fw;
     try {
