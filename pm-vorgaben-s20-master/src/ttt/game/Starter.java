@@ -38,9 +38,9 @@ public class Starter {
     maingame.setPlayerX(xplayer);
     maingame.setPlayerO(oplayer);
 
-
-    jchar.saveStats(maingame.playGame());
-    jchar.showStats();
+    maingame.playGame();
+    // jchar.saveStats(maingame.playGame());
+    // jchar.showStats();
 
 
 
