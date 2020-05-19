@@ -4,7 +4,6 @@ package ttt.game;
 import Charts.Charts;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import jcharts.jcharts;
 import ttt.strategy.HumanPlay;
 import ttt.strategy.MinMaxStrategy;
 
@@ -33,25 +32,17 @@ public class Starter {
 
     Game maingame = new Game();
 
-    jcharts jchar = new jcharts();
+    
 
 
     maingame.setPlayerX(xplayer);
     maingame.setPlayerO(oplayer);
 
     maingame.playGame();
-    // jchar.saveStats(maingame.playGame());
-    // jchar.showStats();
-
+    
     Charts chart = new Charts();
-    if (maingame.evalState(xplayer) == 1) {
-      chart.addGameToFile("xplayer", maingame.remainingMoves().size());
-    }
-    if (maingame.evalState(oplayer) == 1) {
-      chart.addGameToFile("oplayer", maingame.remainingMoves().size());
-    }
-    chart.addPlayerToFile("xplayer", maingame.evalState(xplayer));
-    chart.addPlayerToFile("oplayer", maingame.evalState(oplayer));
+    
+    chart.saveStats(maingame.playGame(), xplayer, oplayer);
 
     chart.chartPlayer("xplayer");
     String[] players = {"xplayer", "oplayer"};
