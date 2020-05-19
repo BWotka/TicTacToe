@@ -1,0 +1,2 @@
+HumanPlay,0,1,0
+MinMaxStrategy,0,1,0
