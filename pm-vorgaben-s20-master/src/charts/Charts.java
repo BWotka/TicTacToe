@@ -1,4 +1,4 @@
-package Charts;
+package charts;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +20,6 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import ttt.game.IGame;
-import ttt.game.IPlayer;
 import ttt.game.Player;
 
 /**
@@ -74,13 +73,14 @@ public class Charts {
   public void chartPlayer(Player player) {
     int[] values = valueOfPlayer(player);
     DefaultPieDataset pieDataset = new DefaultPieDataset();
-    pieDataset.setValue("Siege", values[0]);
+    pieDataset.setValue("wins", values[0]);
     pieDataset.setValue("Unentschieden", values[1]);
-    pieDataset.setValue("Niederlagen", values[2]);
-    JFreeChart chart = ChartFactory.createPieChart(player.getStrategy(), pieDataset, true, false, false);
+    pieDataset.setValue("losses", values[2]);
+    JFreeChart chart =
+        ChartFactory.createPieChart(player.getStrategy(), pieDataset, true, false, false);
 
     // create and display a frame...
-    ChartFrame frame = new ChartFrame("Statistic of " + player, chart);
+    ChartFrame frame = new ChartFrame("statistic of " + player, chart);
     frame.pack();
     frame.setVisible(true);
   }
@@ -94,15 +94,18 @@ public class Charts {
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     for (int i = 0; i < players.length; i++) {
       int[] values = valueOfPlayer(players[i]);
-      if (values[2] != 0) {
-        dataset.addValue((float) values[0] / (float) values[2], "wins/loses", players[i].getStrategy());
+      if (values[2] != 0) { // not divide with zero
+        dataset.addValue((float) values[0] / (float) values[2], "wins/losses",
+            players[i].getStrategy());
+      } else {
+        dataset.addValue(values[0], "number of wins, no losses", players[i].getStrategy());
       }
     }
 
-    JFreeChart chart = ChartFactory.createBarChart("Vergleich der Strategien", "Category", "Value",
+    JFreeChart chart = ChartFactory.createBarChart("Compare of strategies", "Category", "Value",
         dataset, PlotOrientation.VERTICAL, true, true, false);
 
-    ChartFrame frame = new ChartFrame("Example", chart);
+    ChartFrame frame = new ChartFrame("Compare Strategies", chart);
     frame.pack();
     frame.setVisible(true);
   }
@@ -112,8 +115,8 @@ public class Charts {
    */
   public void chartGames(Player player1, Player player2) {
     readListFromFile("Plays.txt");
-    XYSeries seriePlayer1 = new XYSeries("left moves in his won games");
-    XYSeries seriePlayer2 = new XYSeries("left moves in his won games");
+    XYSeries seriePlayer1 = new XYSeries(player1.getStrategy());
+    XYSeries seriePlayer2 = new XYSeries(player2.getStrategy());
     for (int i = 0; i < playerList.size(); i++) {
       String[] string = playerList.get(i).split(",");
       if (string[0].contentEquals(player1.getStrategy())) {
@@ -123,17 +126,18 @@ public class Charts {
         seriePlayer2.add(i, Integer.parseInt(string[1]));
       }
     }
-
     XYSeriesCollection dataset = new XYSeriesCollection();
-    dataset.addSeries(seriePlayer1);
-    dataset.addSeries(seriePlayer2);
-
+    if (seriePlayer1 != null) {
+      dataset.addSeries(seriePlayer1);
+    }
+    if (seriePlayer2 != null) {
+      dataset.addSeries(seriePlayer2);
+    }
     XYLineAndShapeRenderer line = new XYLineAndShapeRenderer();
     NumberAxis xax = new NumberAxis("games");
     NumberAxis yax = new NumberAxis("left moves");
     XYPlot plot = new XYPlot(dataset, xax, yax, line);
     JFreeChart chart = new JFreeChart(plot);
-
     ApplicationFrame splineframe = new ApplicationFrame("left moves in the games");
     ChartPanel chartPanel = new ChartPanel(chart);
     splineframe.setContentPane(chartPanel);
