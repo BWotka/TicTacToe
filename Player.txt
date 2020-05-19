@@ -1,2 +1,16 @@
 HumanPlay,0,1,0
 MinMaxStrategy,0,1,0
+HumanPlay,0,1,0
+MinMaxStrategy,0,1,0
+HumanPlay,0,0,1
+MinMaxStrategy,1,0,0
+HumanPlay,0,0,1
+MinMaxStrategy,1,0,0
+HumanPlay1,0,0
+MinMayStrategy,0,0,1
+HumanPlay,0,0,1
+MinMaxStrategy,1,0,0
+HumanPlay,0,0,1
+MinMaxStrategy,1,0,0
+HumanPlay,0,0,1
+MinMaxStrategy,1,0,0

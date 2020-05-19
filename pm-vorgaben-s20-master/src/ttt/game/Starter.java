@@ -43,10 +43,10 @@ public class Starter {
 
     chart.saveStats(maingame.playGame(), xplayer, oplayer);
 
-    chart.chartPlayer("xplayer");
-    String[] players = {"xplayer", "oplayer"};
+    chart.chartPlayer(xplayer);
+    Player[] players = {xplayer, oplayer};
     chart.chartPlayers(players);
-    chart.chartGames();
+    //chart.chartGames(xplayer,oplayer);
 
 
 

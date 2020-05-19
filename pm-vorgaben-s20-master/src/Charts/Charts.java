@@ -20,6 +20,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import ttt.game.IGame;
+import ttt.game.IPlayer;
 import ttt.game.Player;
 
 /**
@@ -48,15 +49,15 @@ public class Charts {
 
   /**
    * 
-   * @param name the name of the player or strategy from that the values would be searched
+   * @param player the name of the player or strategy from that the values would be searched
    * @return values of name
    */
-  private int[] valueOfPlayer(String name) {
+  private int[] valueOfPlayer(Player player) {
     int[] values = {0, 0, 0};
     readListFromFile("Player.txt");
     for (int i = 0; i < playerList.size(); i++) {
       String[] string = playerList.get(i).split(",");
-      if (string[0].equals(name)) {
+      if (string[0].equals(player.getStrategy())) {
         values[0] = values[0] + Integer.parseInt(string[1]);
         values[1] = values[1] + Integer.parseInt(string[2]);
         values[2] = values[2] + Integer.parseInt(string[3]);
@@ -70,13 +71,13 @@ public class Charts {
    * 
    * @param player name of the player
    */
-  public void chartPlayer(String player) {
+  public void chartPlayer(Player player) {
     int[] values = valueOfPlayer(player);
     DefaultPieDataset pieDataset = new DefaultPieDataset();
     pieDataset.setValue("Siege", values[0]);
     pieDataset.setValue("Unentschieden", values[1]);
     pieDataset.setValue("Niederlagen", values[2]);
-    JFreeChart chart = ChartFactory.createPieChart(player, pieDataset, true, false, false);
+    JFreeChart chart = ChartFactory.createPieChart(player.getStrategy(), pieDataset, true, false, false);
 
     // create and display a frame...
     ChartFrame frame = new ChartFrame("Statistic of " + player, chart);
@@ -89,12 +90,12 @@ public class Charts {
    * 
    * @param players name of the player
    */
-  public void chartPlayers(String[] players) {
+  public void chartPlayers(Player[] players) {
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     for (int i = 0; i < players.length; i++) {
       int[] values = valueOfPlayer(players[i]);
       if (values[2] != 0) {
-        dataset.addValue((float) values[0] / (float) values[2], "wins/loses", players[i]);
+        dataset.addValue((float) values[0] / (float) values[2], "wins/loses", players[i].getStrategy());
       }
     }
 
@@ -109,17 +110,23 @@ public class Charts {
   /**
    * shows a chart of every game how many moves left.
    */
-  public void chartGames() {
+  public void chartGames(Player player1, Player player2) {
     readListFromFile("Plays.txt");
-
-    XYSeries serie = new XYSeries("left moves in the games");
+    XYSeries seriePlayer1 = new XYSeries("left moves in his won games");
+    XYSeries seriePlayer2 = new XYSeries("left moves in his won games");
     for (int i = 0; i < playerList.size(); i++) {
       String[] string = playerList.get(i).split(",");
-      serie.add(i, Integer.parseInt(string[1]));
+      if (string[0].contentEquals(player1.getStrategy())) {
+        seriePlayer1.add(i, Integer.parseInt(string[1]));
+      }
+      if (string[0].contentEquals(player2.getStrategy())) {
+        seriePlayer2.add(i, Integer.parseInt(string[1]));
+      }
     }
 
     XYSeriesCollection dataset = new XYSeriesCollection();
-    dataset.addSeries(serie);
+    dataset.addSeries(seriePlayer1);
+    dataset.addSeries(seriePlayer2);
 
     XYLineAndShapeRenderer line = new XYLineAndShapeRenderer();
     NumberAxis xax = new NumberAxis("games");
