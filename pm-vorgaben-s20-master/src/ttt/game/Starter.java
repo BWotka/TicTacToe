@@ -4,7 +4,8 @@ package ttt.game;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import jcharts.jcharts;
-import ttt.strategy.*;
+import ttt.strategy.HumanPlay;
+import ttt.strategy.MinMaxStrategy;
 
 /**
  * Starter class, sets up the game.

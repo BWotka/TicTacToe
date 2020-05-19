@@ -210,7 +210,7 @@ public class Game implements IGame {
   /**
    * The game itself runs in here.
    * 
-   * @return the game after it ended
+   * @return the game after it ended to read the info
    */
   public Game playGame() {
     System.out.println("Game starting");
