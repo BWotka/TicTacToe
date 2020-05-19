@@ -33,7 +33,7 @@ public class Player implements IPlayer {
     return symbol;
   }
 
-  public IGameStrategy getStrategy() {
-    return strat;
+  public String getStrategy() {
+    return strat.getClass().getName().substring(13);
   }
 }
