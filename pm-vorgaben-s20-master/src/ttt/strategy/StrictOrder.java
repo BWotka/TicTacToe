@@ -15,6 +15,8 @@ public class StrictOrder implements IGameStrategy {
 
   @Override
   public IMove nextMove(IGame g) {
+
+    // tests if its desired moves are available, if so, returns them
     if (g.remainingMoves().contains(new Move(1, 1))) {
       return new Move(1, 1);
     } else if (g.remainingMoves().contains(new Move(1, 0))) {
