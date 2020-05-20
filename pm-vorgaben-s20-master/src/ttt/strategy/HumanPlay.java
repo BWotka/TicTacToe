@@ -33,11 +33,13 @@ public class HumanPlay implements IGameStrategy {
     } catch (NumberFormatException e1) {
       System.out.println("That was not a integer! Default 1 was used.");
       column = 1;
-      e1.printStackTrace();
     } catch (IOException e1) {
       System.out.println("Error when reading the console. Default value 1 was used.");
       column = 1;
-      e1.printStackTrace();
+
+    } catch (Exception e1) {
+      System.out.println("Unknown Error, default '1' used");
+      column = 1;
     }
 
     // reading the row
@@ -53,6 +55,9 @@ public class HumanPlay implements IGameStrategy {
       System.out.println("Error when reading the console. Default value 1 was used.");
       row = 1;
       e.printStackTrace();
+    } catch (Exception e1) {
+      System.out.println("Unknown Error, default '1' used");
+      row = 1;
     }
 
     // testing if the values are in range
