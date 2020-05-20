@@ -8,8 +8,8 @@ package ttt.game;
  *
  */
 public class Move implements IMove {
-  int row;
-  int column;
+  private int row;
+  private int column;
 
   public Move(int pcolumn, int prow) {
     row = prow;
