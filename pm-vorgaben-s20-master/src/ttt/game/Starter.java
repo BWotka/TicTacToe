@@ -41,11 +41,25 @@ public class Starter {
     maingame.setPlayerO(oplayer);
 
     // starting the game
-    maingame.playGame();
+
+    System.out.println("Game starting");
+
+    while (maingame.evalState(maingame.currentPlayer()) == 0
+        && !maingame.remainingMoves().isEmpty()) {
+      System.out.println("**************");
+      maingame.printField();
+      System.out.println("**************");
+      maingame.doMove(maingame.currentPlayer().nextMove(maingame));
+
+    }
+    maingame.printField();
+    System.out.println("~~~Game ended!~~~");
+
+
 
     // showing stats fir all games until now
     Charts chart = new Charts();
-    chart.saveStats(maingame.playGame(), xplayer, oplayer);
+    chart.saveStats(maingame, xplayer, oplayer);
     chart.chartPlayer(xplayer);
     chart.chartPlayer(oplayer);
     Player[] players = {xplayer, oplayer};

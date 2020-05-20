@@ -212,19 +212,5 @@ public class Game implements IGame {
    * 
    * @return the game after it ended to read the info
    */
-  public Game playGame() {
-    System.out.println("Game starting");
 
-    while (evalState(current) == 0 && !remainingMoves().isEmpty()) {
-      System.out.println("**************");
-      printField();
-      System.out.println("**************");
-      doMove(currentPlayer().nextMove(this));
-
-    }
-    printField();
-    System.out.println("~~~Game ended!~~~");
-    return this;
-
-  }
 }
