@@ -10,8 +10,8 @@ import ttt.strategy.IGameStrategy;
  *
  */
 public class Player implements IPlayer {
-  char symbol;
-  IGameStrategy strat;
+  private char symbol;
+  private IGameStrategy strat;
 
   public Player(char psymbol) {
     symbol = psymbol;
@@ -32,6 +32,7 @@ public class Player implements IPlayer {
     return symbol;
   }
 
+  // returns the name of the Strategy
   public String getStrategy() {
     return strat.getClass().getName().substring(13);
   }
