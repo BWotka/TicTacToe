@@ -1,10 +1,10 @@
-oplayer,3
-oplayer,1
-oplayer,1
-oplayer,3
-oplayer,1
-oplayer,3
-oplayer,1
+HumanPlay,3
+MinMaxStrategy,1
+MinMaxStrategy,1
+MinMaxStrategy,3
+MinMaxStrategy,1
+MinMaxStrategy,3
+MinMaxStrategy,1
 HumanPlay,1
 MinMaxStrategy,1
 MinMaxStrategy,1
@@ -27,3 +27,5 @@ MinMaxStrategy,3
 MinMaxStrategy,3
 MinMaxStrategy,1
 MinMaxStrategy,3
+HumanPlay,4
+HumanPlay,4
